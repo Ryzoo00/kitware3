@@ -28,7 +28,7 @@ const app = express();
 // Security middleware
 app.use(helmet());
 app.use(cors({
-  origin: [config.FRONTEND_URL, 'http://localhost:3000', 'http://localhost:3001', 'http://localhost:3002', 'http://localhost:3008', 'http://localhost:5173', 'http://localhost:5174', 'http://localhost:5175'],
+  origin: [config.FRONTEND_URL, 'https://kitware1.vercel.app', 'https://kitware1-git-main-ryzoo00s-projects.vercel.app', 'http://localhost:3000', 'http://localhost:3001', 'http://localhost:3002', 'http://localhost:3008', 'http://localhost:5173', 'http://localhost:5174', 'http://localhost:5175'],
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
