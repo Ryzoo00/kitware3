@@ -1,18 +1,15 @@
 {
+  "$schema": "https://json.schemastore.org/package.json",
   "name": "mern-ecommerce",
   "version": "1.0.0",
   "description": "MERN Stack E-Commerce Application",
   "type": "module",
   "scripts": {
-    "build": "npm run install-client && npm run build:client",
-    "build:client": "cd client && npm run build",
+    "build": "npm install && npm --prefix client install && npm --prefix client run build",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "server": "cd server && npm run dev",
-    "client": "cd client && npm run dev",
-    "install-client": "cd client && npm install",
-    "install-server": "cd server && npm install",
-    "install-all": "npm run install-server && npm run install-client",
-    "start": "cd server && npm start"
+    "server": "npm --prefix server run dev",
+    "client": "npm --prefix client run dev",
+    "start": "npm --prefix server start"
   },
   "keywords": [
     "mern",
@@ -21,7 +18,6 @@
     "nodejs",
     "mongodb"
   ],
-  "author": "",
   "license": "MIT",
   "devDependencies": {
     "concurrently": "^8.2.2"
