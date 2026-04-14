@@ -1,8 +1,9 @@
 {
   "version": 2,
-  "buildCommand": "if [ -d \"client\" ]; then cd client && npm install && npm run build; else npm install && npm run build; fi",
+  "buildCommand": "cd client && npm install && npm run build",
   "outputDirectory": "client/dist",
-  "installCommand": "npm install && npm install --prefix client",
+  "installCommand": "npm install",
+  "rootDirectory": ".",
   "rewrites": [
     {
       "source": "/api/(.*)",
