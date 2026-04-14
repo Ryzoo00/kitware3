@@ -132,8 +132,14 @@ const connectDatabase = async () => {
   }
 };
 
-// Connect to database on cold start for Vercel serverless
-connectDatabase();
+// Connect to database on cold start for Vercel serverless - wrap in try-catch to prevent crash
+try {
+  connectDatabase().catch(err => {
+    console.error('DB Connection Error (non-fatal):', err.message);
+  });
+} catch (err) {
+  console.error('DB Init Error (non-fatal):', err.message);
+}
 
 // Export for Vercel serverless
 export default app;
