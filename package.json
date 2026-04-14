@@ -5,10 +5,8 @@
   "description": "MERN Stack E-Commerce Application",
   "type": "module",
   "scripts": {
-    "build": "cd client && npm install && npm run build",
-    "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "server": "npm --prefix api run dev",
-    "client": "npm --prefix client run dev",
+    "build": "echo 'No build needed for API-only'",
+    "dev": "npm --prefix api run dev",
     "start": "node api/index.js"
   },
   "keywords": [
