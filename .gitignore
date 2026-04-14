@@ -21,4 +21,8 @@ Thumbs.db
 .vscode/
 .idea/
 node_modules
+
+# Vercel
+.vercel
+
 git init
