@@ -73,6 +73,10 @@ app.get('/api/health', (req, res) => {
   res.json({ status: 'OK', message: 'Server is running' });
 });
 
+// Favicon handler - return 204 to prevent 500 errors
+app.get('/favicon.ico', (req, res) => res.status(204).end());
+app.get('/favicon.png', (req, res) => res.status(204).end());
+
 // Default route for base URL
 app.get('/', (req, res) => {
   res.json({ 
