@@ -110,18 +110,21 @@ const connectDatabase = async () => {
   try {
     const dbConnected = await connectDB();
     
-    // Drop old index to fix guest review issue
-    if (dbConnected) {
+    // Drop old index to fix guest review issue (skip on fresh DB)
+    if (dbConnected && process.env.NODE_ENV !== 'production') {
       try {
         const db = mongoose.connection.db;
-        const indexes = await db.collection('reviews').indexes();
-        const oldIndex = indexes.find(i => i.name === 'user_1_product_1');
-        if (oldIndex && !oldIndex.partialFilterExpression) {
-          await db.collection('reviews').dropIndex('user_1_product_1');
-          console.log('Dropped old user_1_product_1 index');
+        const collections = await db.listCollections({ name: 'reviews' }).toArray();
+        if (collections.length > 0) {
+          const indexes = await db.collection('reviews').indexes();
+          const oldIndex = indexes.find(i => i.name === 'user_1_product_1');
+          if (oldIndex && !oldIndex.partialFilterExpression) {
+            await db.collection('reviews').dropIndex('user_1_product_1');
+            console.log('Dropped old user_1_product_1 index');
+          }
         }
       } catch (err) {
-        console.log('Index check:', err.message);
+        console.log('Index check (non-fatal):', err.message);
       }
     }
     
