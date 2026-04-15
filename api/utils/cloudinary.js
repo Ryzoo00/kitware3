@@ -24,10 +24,7 @@ function getFreshEnv() {
 }
 
 const env = getFreshEnv();
-console.log('☁️ Cloudinary Config Loaded:');
-console.log('  Cloud Name:', env.CLOUDINARY_CLOUD_NAME);
-console.log('  API Key:', env.CLOUDINARY_API_KEY);
-console.log('  API Secret:', env.CLOUDINARY_API_SECRET ? '***' + env.CLOUDINARY_API_SECRET.slice(-4) : 'MISSING');
+// Credentials logging removed for security
 
 cloudinary.config({
   cloud_name: env.CLOUDINARY_CLOUD_NAME,
@@ -48,8 +45,6 @@ export const uploadImage = async (filePath, folder = 'products') => {
       api_secret: fresh.CLOUDINARY_API_SECRET,
       secure: true
     });
-    
-    console.log('📤 Uploading with API Key:', fresh.CLOUDINARY_API_KEY);
     
     const result = await cloudinary.uploader.upload(filePath, {
       folder: `ecommerce/${folder}`,

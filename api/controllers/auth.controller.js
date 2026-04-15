@@ -83,6 +83,7 @@ export const login = async (req, res, next) => {
     // Check if user exists
     const user = await User.findOne({ email }).select('+password');
     if (!user) {
+      console.log(`[Login Failed] User not found: ${email}`);
       const error = new Error('Invalid credentials');
       error.status = 401;
       throw error;
@@ -105,6 +106,7 @@ export const login = async (req, res, next) => {
     // Check password
     const isMatch = await user.comparePassword(password);
     if (!isMatch) {
+      console.log(`[Login Failed] Password mismatch for user: ${email}`);
       const error = new Error('Invalid credentials');
       error.status = 401;
       throw error;
