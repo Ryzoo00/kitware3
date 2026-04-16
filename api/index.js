@@ -25,6 +25,15 @@ import siteReviewRoutes from './routes/siteReview.routes.js';
 
 const app = express();
 
+// Simple health endpoint - placed early
+app.get('/api/health', (req, res) => {
+  res.json({ status: 'OK', message: 'Server is running', time: new Date().toISOString() });
+});
+
+// Favicon handler
+app.get('/favicon.ico', (req, res) => res.status(204).end());
+app.get('/favicon.png', (req, res) => res.status(204).end());
+
 // Security middleware
 app.use(helmet());
 app.use(cors({
@@ -66,15 +75,6 @@ app.use('/api/categories', categoryRoutes);
 app.use('/api/coupons', couponRoutes);
 app.use('/api/special-products', specialProductRoutes);
 app.use('/api/site-reviews', siteReviewRoutes);
-
-// Health check endpoint
-app.get('/api/health', (req, res) => {
-  res.json({ status: 'OK', message: 'Server is running' });
-});
-
-// Favicon handler - return 204 to prevent 500 errors
-app.get('/favicon.ico', (req, res) => res.status(204).end());
-app.get('/favicon.png', (req, res) => res.status(204).end());
 
 // Default route for base URL
 app.get('/', (req, res) => {
